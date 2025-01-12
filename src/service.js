@@ -1,26 +1,28 @@
 import axios from 'axios';
 
-const apiUrl = "https://localhost:7271"
+const apiUrl = "http://localhost:5219"
 
 export default {
   getTasks: async () => {
-    const result = await axios.get(`${apiUrl}/items`)    
+    const result = await axios.get(`${apiUrl}/todos`)    
     return result.data;
   },
 
   addTask: async(name)=>{
     console.log('addTask', name)
-    //TODO
-    return {};
+    const result = await axios.post(`${apiUrl}/todos`,{name})  
+    debugger  
+    return result.data;
   },
 
   setCompleted: async(id, isComplete)=>{
     console.log('setCompleted', {id, isComplete})
-    //TODO
-    return {};
+    const result = await axios.put(`${apiUrl}/todos/${id}?isComplete=${isComplete}`);
+    return result.data;
   },
 
-  deleteTask:async()=>{
-    console.log('deleteTask')
+  deleteTask:async(id)=>{
+    const result = await axios.delete(`${apiUrl}/todos/${id}`)    
+    return result.data;
   }
 };

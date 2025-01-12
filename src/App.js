@@ -7,17 +7,20 @@ function App() {
 
   async function getTodos() {
     const todos = await service.getTasks();
+    console.log(todos);  
     setTodos(todos);
   }
 
   async function createTodo(e) {
     e.preventDefault();
+    debugger
     await service.addTask(newTodo);
     setNewTodo("");//clear input
     await getTodos();//refresh tasks list (in order to see the new one)
   }
 
   async function updateCompleted(todo, isComplete) {
+    debugger
     await service.setCompleted(todo.id, isComplete);
     await getTodos();//refresh tasks list (in order to see the updated one)
   }
@@ -36,7 +39,8 @@ function App() {
       <header className="header">
         <h1>todos</h1>
         <form onSubmit={createTodo}>
-          <input className="new-todo" placeholder="Well, let's take on the day" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
+          <input className="new-todo" placeholder="Well, let's take on the day"
+           value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
         </form>
       </header>
       <section className="main" style={{ display: "block" }}>
